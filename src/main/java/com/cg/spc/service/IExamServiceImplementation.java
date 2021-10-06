@@ -11,19 +11,28 @@ import org.springframework.stereotype.Service;
 
 import com.cg.spc.entities.ClassId;
 import com.cg.spc.entities.Exam;
-import com.cg.spc.repository.IClassIdRepository;
-import com.cg.spc.repository.IExamRepository;
+import com.cg.spc.repository.ClassIdRepository;
+import com.cg.spc.repository.ExamRepository;
 
 @Service
-public class IExamServiceImplementation implements IExamService {
+public class IExamServiceImplementation implements ExamService {
 	@Autowired
-	private IExamRepository examRepository;
+	private ExamRepository examRepository;
 	
 	@Autowired
-	private IClassIdRepository classIdRepository;
+	private ClassIdRepository classIdRepository;
+	
 
 	@Override
 	public Exam addExam(Exam exam) {
+		ClassId classId  = exam.getClassId();
+		if(classId != null) {
+			long id = classId.getClassId();
+			Optional<ClassId> classIdContainer = classIdRepository.findById(id);
+			if(classIdContainer.isPresent()) {
+				exam.setClassId(classIdContainer.get());
+			}
+		}
 		return examRepository.save(exam);
 	}
 
@@ -49,27 +58,21 @@ public class IExamServiceImplementation implements IExamService {
 
 	@Override
 	public List<Exam> listAllExamsByDate(Date dateOfExam) {
-		List<Exam> existingExam = null;
+		List<Exam> existingExam = examRepository.findByDate(dateOfExam);
 		Collections.sort(existingExam, new Comparator<Exam>() {
 		    public int compare(Exam m1, Exam m2) {
-		        return m1.getDateTimeofExam().compareTo(m2.getDateTimeofExam());
+		        return m1.getDateOfExam().compareTo(m2.getDateOfExam());
 		    }
 		});
 		return existingExam;
 	}
 
 	@Override
-	public List<Exam> listAllExamsByClass(String classId) {
-		Optional<ClassId> class_= classIdRepository.findById((String) classId);
+	public List<Exam> listAllExamsByClass(long classId) {
+		Optional<ClassId> class_= classIdRepository.findById(classId);
 		if (class_.isPresent()) {
 			return examRepository.findByClassId(class_.get());
-			
 		}
-		return null;
-	}
-
-	@Override
-	public List<Exam> listAllExamsByStudent(long userId) {
 		return null;
 	}
 

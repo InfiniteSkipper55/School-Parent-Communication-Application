@@ -11,19 +11,27 @@ import org.springframework.stereotype.Service;
 
 import com.cg.spc.entities.Fee;
 import com.cg.spc.entities.Student;
-import com.cg.spc.repository.IFeeRepository;
-import com.cg.spc.repository.IStudentRepository;
+import com.cg.spc.repository.FeeRepository;
+import com.cg.spc.repository.StudentRepository;
 
 @Service
-public class IFeeServiceImplementation implements IFeeService {
+public class IFeeServiceImplementation implements FeeService {
 	@Autowired
-	IFeeRepository feeRepository;
+	FeeRepository feeRepository;
 	
 	@Autowired
-	IStudentRepository studentRepository;
+	StudentRepository studentRepository;
 
 	@Override
 	public Fee addFee(Fee fee) {
+		Student student  = fee.getStudent();
+		if(student != null) {
+			long studentId = student.getUserId();
+			Optional<Student> studentContainer = studentRepository.findById(studentId);
+			if(studentContainer.isPresent()) {
+				fee.setStudent(studentContainer.get());
+			}
+		}
 		return feeRepository.save(fee);
 	}
 
@@ -53,17 +61,17 @@ public class IFeeServiceImplementation implements IFeeService {
 	}
 
 	@Override
-	public Fee retrieveFeeByStudent(long userId) {
-//		Optional<Student> student = studentRepository.findById(userId);
-//		if (student.isPresent()) {
-//			return studentRepository.findByStudent(student.get());
-//		}
+	public List<Fee> retrieveFeeByStudent(long userId) {
+		Optional<Student> student = studentRepository.findById(userId);
+		if(student.isPresent()) {			
+			return feeRepository.findByStudentId(student.get());
+		}
 		return null;
 	}
 
 	@Override
 	public List<Fee> retrieveAllFeeByMonth(Date startMonthYear) {
-		List<Fee> existingFee = null;
+		List<Fee> existingFee = feeRepository.findByDate(startMonthYear);
 		Collections.sort(existingFee, new Comparator<Fee>() {
 		    public int compare(Fee m1, Fee m2) {
 		        return m1.getStartMonthYear().compareTo(m2.getStartMonthYear());

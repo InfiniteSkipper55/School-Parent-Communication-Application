@@ -11,19 +11,27 @@ import org.springframework.stereotype.Service;
 
 import com.cg.spc.entities.Attendance;
 import com.cg.spc.entities.Student;
-import com.cg.spc.repository.IAttendanceRepository;
-import com.cg.spc.repository.IStudentRepository;
+import com.cg.spc.repository.AttendanceRepository;
+import com.cg.spc.repository.StudentRepository;
 
 @Service
-public class IAttendanceServiceImplementation implements IAttendanceService{
+public class IAttendanceServiceImplementation implements AttendanceService{
 	@Autowired
-	private IAttendanceRepository attendanceRepository;
+	private AttendanceRepository attendanceRepository;
 	
 	@Autowired
-	private IStudentRepository studentRepository;
+	private StudentRepository studentRepository;
 
 	@Override
 	public Attendance addAttendance(Attendance attendance) {
+		Student student  = attendance.getStudent();
+		if(student != null) {
+			long studentId = student.getUserId();
+			Optional<Student> studentContainer = studentRepository.findById(studentId);
+			if(studentContainer.isPresent()) {
+				attendance.setStudent(studentContainer.get());
+			}
+		}
 		return attendanceRepository.save(attendance);
 	}
 
@@ -38,7 +46,7 @@ public class IAttendanceServiceImplementation implements IAttendanceService{
 
 	@Override
 	public List<Attendance> listAttendanceByMonth(Date date) {
-		List<Attendance> existingAttendance = null;
+		List<Attendance> existingAttendance = attendanceRepository.findByDate(date);
 		Collections.sort(existingAttendance, new Comparator<Attendance>() {
 		    public int compare(Attendance m1, Attendance m2) {
 		        return m1.getDateOfClass().compareTo(m2.getDateOfClass());
@@ -51,7 +59,7 @@ public class IAttendanceServiceImplementation implements IAttendanceService{
 	public List<Attendance> listAttendanceByStudent(long userId) {
 		Optional<Student> student = studentRepository.findById(userId);
 		if (student.isPresent()) {
-			return attendanceRepository.findByStudent(student.get());
+			return attendanceRepository.findByStudentId(student.get());
 		}
 		return null;
 		

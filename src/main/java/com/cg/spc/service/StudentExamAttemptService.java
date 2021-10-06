@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.cg.spc.entities.StudentExamAttempt;
 
-public interface IStudentExamAttemptService {
+public interface StudentExamAttemptService {
 	public StudentExamAttempt addStudentExamAttempt(StudentExamAttempt sea);
 	public StudentExamAttempt updateStudentExamAttempt(StudentExamAttempt sea);
 	public StudentExamAttempt deleteStudentExamAttempt(int studentExamAttemptId);

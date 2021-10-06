@@ -18,7 +18,7 @@ public class ClassId {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "CLASS_ID")
-	private String classId;
+	private long classId;
 	
 	@Column(name = "GRADE")
 	private int grade;
@@ -34,10 +34,10 @@ public class ClassId {
 	@JoinColumn(name = "SUBJECT_TEACHERS")
 	private List<Teacher> subjectTeachers;
 	
-	public String getClassId() {
+	public long getClassId() {
 		return classId;
 	}
-	public void setClassId(String classId) {
+	public void setClassId(long classId) {
 		this.classId = classId;
 	}
 	public int getGrade() {
@@ -52,7 +52,19 @@ public class ClassId {
 	public void setDivision(char division) {
 		this.division = division;
 	}
-	public ClassId(String classId, int grade, char division) {
+	public Teacher getClassTeachers() {
+		return classTeachers;
+	}
+	public void setClassTeachers(Teacher classTeachers) {
+		this.classTeachers = classTeachers;
+	}
+	public List<Teacher> getSubjectTeachers() {
+		return subjectTeachers;
+	}
+	public void setSubjectTeachers(List<Teacher> subjectTeachers) {
+		this.subjectTeachers = subjectTeachers;
+	}
+	public ClassId(long classId, int grade, char division) {
 		super();
 		this.classId = classId;
 		this.grade = grade;
@@ -62,6 +74,15 @@ public class ClassId {
 		super();
 		this.grade = grade;
 		this.division = division;
+	}
+	
+	public ClassId(long classId, int grade, char division, Teacher classTeachers, List<Teacher> subjectTeachers) {
+		super();
+		this.classId = classId;
+		this.grade = grade;
+		this.division = division;
+		this.classTeachers = classTeachers;
+		this.subjectTeachers = subjectTeachers;
 	}
 	@Override
 	public String toString() {

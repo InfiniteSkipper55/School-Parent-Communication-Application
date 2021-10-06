@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.ClassDiary;
-import com.cg.spc.service.IClassDiaryService;
+import com.cg.spc.service.ClassDiaryService;
 
 @RestController
 @RequestMapping("/api")
 public class ClassDiaryController {
 	@Autowired
-	private IClassDiaryService classDiaryService;
+	private ClassDiaryService classDiaryService;
 	
-	public ClassDiaryController(IClassDiaryService classDiaryService) {
+	public ClassDiaryController(ClassDiaryService classDiaryService) {
 		super();
 		this.classDiaryService = classDiaryService;
 	}

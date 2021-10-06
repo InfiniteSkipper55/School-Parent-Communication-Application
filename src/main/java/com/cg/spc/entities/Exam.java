@@ -48,10 +48,10 @@ public class Exam {
 	public void setExamId(int examId) {
 		this.examId = examId;
 	}
-	public Date getDateTimeofExam() {
+	public Date getDateOfExam() {
 		return dateOfExam;
 	}
-	public void setDateTimeofExam(Date dateOfExam) {
+	public void setDateOfExam(Date dateOfExam) {
 		this.dateOfExam = dateOfExam;
 	}
 	public int getMaxMarks() {
@@ -60,11 +60,33 @@ public class Exam {
 	public void setMaxMarks(int maxMarks) {
 		this.maxMarks = maxMarks;
 	}
-	public Exam(int examId, Date dateOfExam, int maxMarks) {
+	public Subject getSubject() {
+		return subject;
+	}
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+	public ExamType getExamType() {
+		return examType;
+	}
+	public void setExamType(ExamType examType) {
+		this.examType = examType;
+	}
+	public ClassId getClassId() {
+		return classId;
+	}
+	public void setClassId(ClassId classId) {
+		this.classId = classId;
+	}
+	
+	public Exam(int examId, Date dateOfExam, int maxMarks, Subject subject, ExamType examType, ClassId classId) {
 		super();
 		this.examId = examId;
 		this.dateOfExam = dateOfExam;
 		this.maxMarks = maxMarks;
+		this.subject = subject;
+		this.examType = examType;
+		this.classId = classId;
 	}
 	public Exam() {
 		super();

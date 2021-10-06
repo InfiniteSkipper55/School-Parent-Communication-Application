@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.cg.spc.entities.DiaryNotes;
 
-public interface IDiaryNotesService {
+public interface DiaryNotesService {
 	public DiaryNotes addDiaryNotes(DiaryNotes dn);
 	public DiaryNotes updateDiaryNotes(DiaryNotes dn);
 	public DiaryNotes deleteDiaryNotes(int diaryNotesId);

@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.StudentExamAttempt;
-import com.cg.spc.service.IStudentExamAttemptService;
+import com.cg.spc.service.StudentExamAttemptService;
 
 @RestController
 @RequestMapping("/api")
 public class StudentExamAttemptController {
 	@Autowired
-	private IStudentExamAttemptService studentExamAttemptService;
+	private StudentExamAttemptService studentExamAttemptService;
 	
-	public StudentExamAttemptController(IStudentExamAttemptService studentExamAttemptService) {
+	public StudentExamAttemptController(StudentExamAttemptService studentExamAttemptService) {
 		super();
 		this.studentExamAttemptService = studentExamAttemptService;
 	}

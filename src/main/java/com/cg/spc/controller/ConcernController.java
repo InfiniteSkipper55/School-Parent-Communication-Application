@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.Concern;
-import com.cg.spc.service.IConcernService;
+import com.cg.spc.service.ConcernService;
 
 @RestController
 @RequestMapping("/api")
 public class ConcernController {
 	@Autowired
-	private IConcernService concernService;
+	private ConcernService concernService;
 	
-	public ConcernController(IConcernService concernService) {
+	public ConcernController(ConcernService concernService) {
 		super();
 		this.concernService = concernService;
 	}
@@ -51,7 +51,7 @@ public class ConcernController {
 	}
 	
 	@GetMapping("/concerns/{parentId}")
-	public List<Concern> retrieveAllUnResolvedConcernsByParent(@PathVariable int parentId){
+	public Concern retrieveAllUnResolvedConcernsByParent(@PathVariable int parentId){
 		return concernService.retrieveAllUnResolvedConcernsByParent(parentId);
 	}
 

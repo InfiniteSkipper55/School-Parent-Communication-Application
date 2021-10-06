@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.FeeInstallment;
-import com.cg.spc.service.IFeeInstallmentService;
+import com.cg.spc.service.FeeInstallmentService;
 
 @RestController
 @RequestMapping("/api")
 public class FeeInstallmentController {
 	@Autowired
-	private IFeeInstallmentService feeInstallmentService;
+	private FeeInstallmentService feeInstallmentService;
 	
-	public FeeInstallmentController(IFeeInstallmentService feeInstallmentService) {
+	public FeeInstallmentController(FeeInstallmentService feeInstallmentService) {
 		super();
 		this.feeInstallmentService = feeInstallmentService;
 	}

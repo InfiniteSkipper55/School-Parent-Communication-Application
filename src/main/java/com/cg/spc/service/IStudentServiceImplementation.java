@@ -6,16 +6,29 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.spc.entities.ClassId;
 import com.cg.spc.entities.Student;
-import com.cg.spc.repository.IStudentRepository;
+import com.cg.spc.repository.ClassIdRepository;
+import com.cg.spc.repository.StudentRepository;
 
 @Service
-public class IStudentServiceImplementation implements IStudentService {
+public class IStudentServiceImplementation implements StudentService {
 	@Autowired
-	IStudentRepository studentRepository;
+	StudentRepository studentRepository;
+	
+	@Autowired
+	ClassIdRepository classIdRepository;
 
 	@Override
 	public Student addStudent(Student student) {
+		ClassId classId = student.getCurrentClass();
+		if (classId != null) {
+			long id = classId.getClassId();
+			Optional<ClassId> classIdContainer = classIdRepository.findById(id);
+			if (classIdContainer.isPresent()) {
+				student.setCurrentClass(classIdContainer.get());
+			}
+		}
 		return studentRepository.save(student);
 	}
 

@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.Exam;
-import com.cg.spc.service.IExamService;
+import com.cg.spc.service.ExamService;
 
 @RestController
 @RequestMapping("/api")
 public class ExamController {
 	@Autowired
-	private IExamService examService;
+	private ExamService examService;
 	
-	public ExamController(IExamService examService) {
+	public ExamController(ExamService examService) {
 		super();
 		this.examService = examService;
 	}
@@ -49,13 +49,8 @@ public class ExamController {
 	}
 	
 	@GetMapping("/exams/{classId}")
-	public List<Exam> listAllExamsByClass(@PathVariable String classId){
+	public List<Exam> listAllExamsByClass(@PathVariable long classId){
 		return examService.listAllExamsByClass(classId);
-	}
-	
-	@GetMapping("/exams/{userId}")
-	public List<Exam> listAllExamsByStudent(@PathVariable long userId){
-		return examService.listAllExamsByStudent(userId);
 	}
 	
 	@GetMapping("/exams/{examId}")

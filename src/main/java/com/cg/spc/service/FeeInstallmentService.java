@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.cg.spc.entities.FeeInstallment;
 
-public interface IFeeInstallmentService {
+public interface FeeInstallmentService {
 	public FeeInstallment makePayment(FeeInstallment feeInstallment);
 	public List<FeeInstallment> pendingInstallments(long userId);
 	public Optional<FeeInstallment> retrieveFeeInstallmentById(int feeInstallmentId);

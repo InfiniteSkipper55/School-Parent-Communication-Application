@@ -50,11 +50,20 @@ public class Attendance {
 	public void setPresent(boolean present) {
 		this.present = present;
 	}
-	public Attendance(int attendanceId, Date dateOfClass, boolean present) {
+	
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
+	public Attendance(int attendanceId, Date dateOfClass, boolean present, Student student) {
 		super();
 		this.attendanceId = attendanceId;
 		this.dateOfClass = dateOfClass;
 		this.present = present;
+		this.student = student;
 	}
 	public Attendance() {
 		super();

@@ -14,15 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.DiaryNotes;
-import com.cg.spc.service.IDiaryNotesService;
+import com.cg.spc.service.DiaryNotesService;
 
 @RestController
 @RequestMapping("/api")
 public class DiaryNotesController {
 	@Autowired
-	private IDiaryNotesService diaryNotesService;
+	private DiaryNotesService diaryNotesService;
 	
-	public DiaryNotesController(IDiaryNotesService diaryNotesService) {
+	public DiaryNotesController(DiaryNotesService diaryNotesService) {
 		super();
 		this.diaryNotesService = diaryNotesService;
 	}
@@ -43,8 +43,8 @@ public class DiaryNotesController {
 	}
 	
 	@GetMapping("/diarynotes")
-	public List<DiaryNotes> retrieveAllDiaryNotesByDate(@RequestBody Date date){
-		return diaryNotesService.retrieveAllDiaryNotesByDate(date);
+	public List<DiaryNotes> retrieveAllDiaryNotesByDate(@RequestBody Date dateOfDiaryNotes){
+		return diaryNotesService.retrieveAllDiaryNotesByDate(dateOfDiaryNotes);
 	}
 	
 	@GetMapping("/diarynotes/{subjectId}")

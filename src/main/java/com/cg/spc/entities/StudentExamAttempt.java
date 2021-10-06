@@ -49,11 +49,26 @@ public class StudentExamAttempt {
 	public void setMarksObtained(int marksObtained) {
 		this.marksObtained = marksObtained;
 	}
-	public StudentExamAttempt(int studentExamAttemptId, boolean attempted, int marksObtained) {
+	public Exam getExam() {
+		return exam;
+	}
+	public void setExam(Exam exam) {
+		this.exam = exam;
+	}
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	public StudentExamAttempt(int studentExamAttemptId, boolean attempted, int marksObtained, Exam exam,
+			Student student) {
 		super();
 		this.studentExamAttemptId = studentExamAttemptId;
 		this.attempted = attempted;
 		this.marksObtained = marksObtained;
+		this.exam = exam;
+		this.student = student;
 	}
 	public StudentExamAttempt() {
 		super();

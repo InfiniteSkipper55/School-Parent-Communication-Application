@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.User;
-import com.cg.spc.service.IUserService;
+import com.cg.spc.service.UserService;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
 	@Autowired
-	private IUserService userService;
+	private UserService userService;
 	
-	public UserController(IUserService userService) {
+	public UserController(UserService userService) {
 		super();
 		this.userService = userService;
 	}

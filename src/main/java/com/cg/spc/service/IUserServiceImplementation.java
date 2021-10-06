@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.spc.entities.User;
-import com.cg.spc.repository.IUserRepository;
+import com.cg.spc.repository.UserRepository;
 @Service
-public class IUserServiceImplementation implements IUserService {
+public class IUserServiceImplementation implements UserService {
 	@Autowired
-	IUserRepository userRepository;
+	UserRepository userRepository;
 
 	@Override
 	public User addNewUser(User user) {

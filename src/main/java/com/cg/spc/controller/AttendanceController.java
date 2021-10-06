@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.Attendance;
-import com.cg.spc.service.IAttendanceService;
+import com.cg.spc.service.AttendanceService;
 
 @RestController
 @RequestMapping("/api")
 public class AttendanceController {
 	@Autowired
-	private IAttendanceService attendanceService;
+	private AttendanceService attendanceService;
 	
-	public AttendanceController(IAttendanceService attendanceService) {
+	public AttendanceController(AttendanceService attendanceService) {
 		super();
 		this.attendanceService = attendanceService;
 	}

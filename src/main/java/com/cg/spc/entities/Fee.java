@@ -69,14 +69,23 @@ public class Fee {
 	public void setEndMonthYear(Date endMonthYear) {
 		this.endMonthYear = endMonthYear;
 	}
-	public Fee(int feeId, double totalFeesDue, double totalFeesReceived, Date startMonthYear,
-			Date endMonthYear) {
+	
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	
+	public Fee(int feeId, double totalFeesDue, double totalFeesReceived, Date startMonthYear, Date endMonthYear,
+			Student student) {
 		super();
 		this.feeId = feeId;
 		this.totalFeesDue = totalFeesDue;
 		this.totalFeesReceived = totalFeesReceived;
 		this.startMonthYear = startMonthYear;
 		this.endMonthYear = endMonthYear;
+		this.student = student;
 	}
 	public Fee() {
 		super();

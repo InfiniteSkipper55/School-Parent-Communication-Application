@@ -29,9 +29,18 @@ public class ClassDiary {
 		this.classDiaryId = classDiaryId;
 	}
 
-	public ClassDiary(int classDiaryId) {
+	public DiaryNotes getDiaryNotes() {
+		return diaryNotes;
+	}
+
+	public void setDiaryNotes(DiaryNotes diaryNotes) {
+		this.diaryNotes = diaryNotes;
+	}
+
+	public ClassDiary(int classDiaryId, DiaryNotes diaryNotes) {
 		super();
 		this.classDiaryId = classDiaryId;
+		this.diaryNotes = diaryNotes;
 	}
 
 	public ClassDiary() {

@@ -45,11 +45,18 @@ public class Parent {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public Parent(int parentId, String mobileNumber, String emailId) {
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	public Parent(int parentId, String mobileNumber, String emailId, Student student) {
 		super();
 		this.parentId = parentId;
 		this.mobileNumber = mobileNumber;
 		this.emailId = emailId;
+		this.student = student;
 	}
 	public Parent() {
 		super();

@@ -60,12 +60,20 @@ public class FeeInstallment {
 	public void setFeePaymentDate(Date feePaymentDate) {
 		this.feePaymentDate = feePaymentDate;
 	}
-	public FeeInstallment(int feeInstallmentId, double feeInstallment, Date dueDate, Date feePaymentDate) {
+	
+	public Fee getFee() {
+		return fee;
+	}
+	public void setFee(Fee fee) {
+		this.fee = fee;
+	}
+	public FeeInstallment(int feeInstallmentId, double feeInstallment, Date dueDate, Date feePaymentDate, Fee fee) {
 		super();
 		this.feeInstallmentId = feeInstallmentId;
 		this.feeInstallment = feeInstallment;
 		this.dueDate = dueDate;
 		this.feePaymentDate = feePaymentDate;
+		this.fee = fee;
 	}
 	public FeeInstallment() {
 		super();

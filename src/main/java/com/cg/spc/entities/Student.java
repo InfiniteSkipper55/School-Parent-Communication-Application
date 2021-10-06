@@ -80,13 +80,42 @@ public class Student {
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-	public Student(long userId, Date dateOfBirth, String name, String emailId, String mobileNumber) {
+	public ClassId getCurrentClass() {
+		return currentClass;
+	}
+	public void setCurrentClass(ClassId currentClass) {
+		this.currentClass = currentClass;
+	}
+	public Subject getSubject() {
+		return subject;
+	}
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	public ClassDiary getClassDiary() {
+		return classDiary;
+	}
+	public void setClassDiary(ClassDiary classDiary) {
+		this.classDiary = classDiary;
+	}
+	public Student(long userId, Date dateOfBirth, String name, String emailId, String mobileNumber,
+			ClassId currentClass, Subject subject, Address address, ClassDiary classDiary) {
 		super();
 		this.userId = userId;
 		this.dateOfBirth = dateOfBirth;
 		this.name = name;
 		this.emailId = emailId;
 		this.mobileNumber = mobileNumber;
+		this.currentClass = currentClass;
+		this.subject = subject;
+		this.address = address;
+		this.classDiary = classDiary;
 	}
 	public Student() {
 		super();

@@ -51,11 +51,35 @@ public class Concern {
 	public void setResolved(boolean resolved) {
 		this.resolved = resolved;
 	}
-	public Concern(int concernId, String concernDescription, boolean resolved) {
+	
+	public ConcernType getConcernType() {
+		return concernType;
+	}
+	public void setConcernType(ConcernType concernType) {
+		this.concernType = concernType;
+	}
+	public ConcernParty getConcernParty() {
+		return concernParty;
+	}
+	public void setConcernParty(ConcernParty concernParty) {
+		this.concernParty = concernParty;
+	}
+	public Parent getParent() {
+		return parent;
+	}
+	public void setParent(Parent parent) {
+		this.parent = parent;
+	}
+	
+	public Concern(int concernId, String concernDescription, boolean resolved, ConcernType concernType,
+			ConcernParty concernParty, Parent parent) {
 		super();
 		this.concernId = concernId;
 		this.concernDescription = concernDescription;
 		this.resolved = resolved;
+		this.concernType = concernType;
+		this.concernParty = concernParty;
+		this.parent = parent;
 	}
 	public Concern() {
 		super();

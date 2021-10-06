@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.spc.entities.Fee;
-import com.cg.spc.service.IFeeService;
+import com.cg.spc.service.FeeService;
 
 @RestController
 @RequestMapping("/api")
 public class FeeController {
 	@Autowired
-	private IFeeService feeService;
+	private FeeService feeService;
 	
-	public FeeController(IFeeService feeService) {
+	public FeeController(FeeService feeService) {
 		super();
 		this.feeService = feeService;
 	}
@@ -49,7 +49,7 @@ public class FeeController {
 	}
 	
 	@GetMapping("/fees/{userId}")
-	public Fee retrieveFeeByStudent(@PathVariable long userId) {
+	public List<Fee> retrieveFeeByStudent(@PathVariable long userId) {
 		return feeService.retrieveFeeByStudent(userId);
 	}
 	

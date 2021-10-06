@@ -2,25 +2,34 @@ package com.cg.spc.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.spc.entities.Concern;
 import com.cg.spc.entities.Parent;
-import com.cg.spc.repository.IConcernRepository;
-import com.cg.spc.repository.IParentRepository;
+import com.cg.spc.repository.ConcernRepository;
+import com.cg.spc.repository.ParentRepository;
 
 @Service
-public class IConcernServiceImplementation implements IConcernService {
+public class IConcernServiceImplementation implements ConcernService {
 	@Autowired
-	private IConcernRepository concernRepository;
+	private ConcernRepository concernRepository;
 	
 	@Autowired
-	private IParentRepository parentRepository;
+	private ParentRepository parentRepository;
 
 	@Override
 	public Concern addConcern(Concern concern) {
+		Parent parent  = concern.getParent();
+		if(parent != null) {
+			int parentId = parent.getParentId();
+			Optional<Parent> parentContainer = parentRepository.findById(parentId);
+			if(parentContainer.isPresent()) {
+				concern.setParent(parentContainer.get());
+			}
+		}
 		return concernRepository.save(concern);
 	}
 
@@ -54,13 +63,26 @@ public class IConcernServiceImplementation implements IConcernService {
 
 	@Override
 	public List<Concern> retrieveAllUnResolvedConcerns() {
-		return null;
+		List<Concern> concerns = concernRepository.findAll();
+		List<Concern> allUnResolvedConcerns = concerns.stream().filter(e -> !e.isResolved())
+				.collect(Collectors.toList());
+		return allUnResolvedConcerns;
 	}
 
 	@Override
-	public List<Concern> retrieveAllUnResolvedConcernsByParent(int parentId) {
+	public Concern retrieveAllUnResolvedConcernsByParent(int parentId) {
+		Optional<Parent> parent = parentRepository.findById(parentId);
+		Concern concerns = null;
+		if (parent.isPresent()) {
+			concerns = concernRepository.findByParent1(parent.get());
+		}
+		if (!concerns.isResolved()) {
+			return concerns;
+
+		}
 		return null;
 	}
+	
 	
 
 }

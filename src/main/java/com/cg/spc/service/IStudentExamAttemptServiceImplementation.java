@@ -8,19 +8,27 @@ import org.springframework.stereotype.Service;
 
 import com.cg.spc.entities.Student;
 import com.cg.spc.entities.StudentExamAttempt;
-import com.cg.spc.repository.IStudentExamAttemptRepository;
-import com.cg.spc.repository.IStudentRepository;
+import com.cg.spc.repository.StudentExamAttemptRepository;
+import com.cg.spc.repository.StudentRepository;
 
 @Service
-public class IStudentExamAttemptServiceImplementation implements IStudentExamAttemptService {
+public class IStudentExamAttemptServiceImplementation implements StudentExamAttemptService {
 	@Autowired
-	IStudentExamAttemptRepository studentExamAttemptRepository;
+	private StudentExamAttemptRepository studentExamAttemptRepository;
 	
 	@Autowired
-	private IStudentRepository studentRepository;
+	private StudentRepository studentRepository;
 
 	@Override
 	public StudentExamAttempt addStudentExamAttempt(StudentExamAttempt studentExamAttempt) {
+		Student student  = studentExamAttempt.getStudent();
+		if(student != null) {
+			long studentId = student.getUserId();
+			Optional<Student> studentContainer = studentRepository.findById(studentId);
+			if(studentContainer.isPresent()) {
+				studentExamAttempt.setStudent(studentContainer.get());
+			}
+		}
 		return studentExamAttemptRepository.save(studentExamAttempt);
 	}
 
