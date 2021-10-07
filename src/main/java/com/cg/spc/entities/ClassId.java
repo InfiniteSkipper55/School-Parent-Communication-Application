@@ -1,16 +1,10 @@
 package com.cg.spc.entities;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity(name = "CLASS_ID_1")
 public class ClassId {
@@ -25,14 +19,6 @@ public class ClassId {
 	
 	@Column(name = "DIVISION")
 	private char division;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "CLASS_TEACHERS")
-	private Teacher classTeachers;
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "SUBJECT_TEACHERS")
-	private List<Teacher> subjectTeachers;
 	
 	public long getClassId() {
 		return classId;
@@ -52,18 +38,6 @@ public class ClassId {
 	public void setDivision(char division) {
 		this.division = division;
 	}
-	public Teacher getClassTeachers() {
-		return classTeachers;
-	}
-	public void setClassTeachers(Teacher classTeachers) {
-		this.classTeachers = classTeachers;
-	}
-	public List<Teacher> getSubjectTeachers() {
-		return subjectTeachers;
-	}
-	public void setSubjectTeachers(List<Teacher> subjectTeachers) {
-		this.subjectTeachers = subjectTeachers;
-	}
 	public ClassId(long classId, int grade, char division) {
 		super();
 		this.classId = classId;
@@ -74,15 +48,6 @@ public class ClassId {
 		super();
 		this.grade = grade;
 		this.division = division;
-	}
-	
-	public ClassId(long classId, int grade, char division, Teacher classTeachers, List<Teacher> subjectTeachers) {
-		super();
-		this.classId = classId;
-		this.grade = grade;
-		this.division = division;
-		this.classTeachers = classTeachers;
-		this.subjectTeachers = subjectTeachers;
 	}
 	@Override
 	public String toString() {
